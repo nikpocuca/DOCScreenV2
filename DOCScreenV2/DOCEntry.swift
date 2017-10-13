@@ -1,5 +1,5 @@
 //
-//  DOCTask.swift
+//  DOCEntry.swift
 //  DOCScreenV2
 //
 //  Created by Nik on 2017-10-02.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ResearchKit
 
-class docEntry {
+class DocEntry {
     
     
     var taskName: String  = "Blank"

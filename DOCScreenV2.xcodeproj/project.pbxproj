@@ -16,8 +16,7 @@
 		2421A1D71F82B49800848FC9 /* DOCScreenV2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A1D61F82B49800848FC9 /* DOCScreenV2UITests.swift */; };
 		2421A1E71F82B4D000848FC9 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A1E61F82B4D000848FC9 /* TaskTableViewController.swift */; };
 		2421A1E91F82B4FD00848FC9 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A1E81F82B4FD00848FC9 /* TaskTableViewCell.swift */; };
-		2421A1EB1F82C78B00848FC9 /* DOCTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A1EA1F82C78B00848FC9 /* DOCTask.swift */; };
-		2421A2121F866DA900848FC9 /* OutlineClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2111F866DA900848FC9 /* OutlineClass.swift */; };
+		2421A1EB1F82C78B00848FC9 /* DOCEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A1EA1F82C78B00848FC9 /* DOCEntry.swift */; };
 		2421A2331F86904100848FC9 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2421A2301F86903000848FC9 /* ResearchKit.framework */; };
 		2421A2341F86904100848FC9 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2421A2301F86903000848FC9 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2421A23D1F86926200848FC9 /* LandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A23C1F86926200848FC9 /* LandViewController.swift */; };
@@ -29,6 +28,8 @@
 		2421A2571F87A97700848FC9 /* ClockTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2561F87A97700848FC9 /* ClockTask.swift */; };
 		2421A2591F87AB1F00848FC9 /* AbstractionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2581F87AB1F00848FC9 /* AbstractionTask.swift */; };
 		2421A25B1F87AE9000848FC9 /* MemoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A25A1F87AE9000848FC9 /* MemoryTask.swift */; };
+		2421A2A81F8E5D3300848FC9 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2A71F8E5D3300848FC9 /* PageViewController.swift */; };
+		2421A2CC1F910C6F00848FC9 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2CB1F910C6F00848FC9 /* DataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,8 +100,7 @@
 		2421A1D81F82B49800848FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2421A1E61F82B4D000848FC9 /* TaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		2421A1E81F82B4FD00848FC9 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
-		2421A1EA1F82C78B00848FC9 /* DOCTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOCTask.swift; sourceTree = "<group>"; };
-		2421A2111F866DA900848FC9 /* OutlineClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineClass.swift; sourceTree = "<group>"; };
+		2421A1EA1F82C78B00848FC9 /* DOCEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOCEntry.swift; sourceTree = "<group>"; };
 		2421A2291F86903000848FC9 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		2421A23C1F86926200848FC9 /* LandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandViewController.swift; sourceTree = "<group>"; };
 		2421A23F1F8692C200848FC9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -111,6 +111,8 @@
 		2421A2561F87A97700848FC9 /* ClockTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockTask.swift; sourceTree = "<group>"; };
 		2421A2581F87AB1F00848FC9 /* AbstractionTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractionTask.swift; sourceTree = "<group>"; };
 		2421A25A1F87AE9000848FC9 /* MemoryTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTask.swift; sourceTree = "<group>"; };
+		2421A2A71F8E5D3300848FC9 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		2421A2CB1F910C6F00848FC9 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,14 +170,14 @@
 				2421A1B61F82B49800848FC9 /* AppDelegate.swift */,
 				2421A1B81F82B49800848FC9 /* ViewController.swift */,
 				2421A1BA1F82B49800848FC9 /* Main.storyboard */,
-				2421A1EA1F82C78B00848FC9 /* DOCTask.swift */,
+				2421A1EA1F82C78B00848FC9 /* DOCEntry.swift */,
 				2421A1BD1F82B49800848FC9 /* Assets.xcassets */,
 				2421A1BF1F82B49800848FC9 /* LaunchScreen.storyboard */,
 				2421A2391F86917400848FC9 /* Landing */,
 				2421A1C21F82B49800848FC9 /* Info.plist */,
-				2421A1E61F82B4D000848FC9 /* TaskTableViewController.swift */,
+				2421A2C81F910C5C00848FC9 /* Data */,
+				2421A2A41F8E5D0100848FC9 /* ViewControllers */,
 				2421A2381F86916600848FC9 /* Tasks */,
-				2421A2111F866DA900848FC9 /* OutlineClass.swift */,
 				2421A1E81F82B4FD00848FC9 /* TaskTableViewCell.swift */,
 			);
 			path = DOCScreenV2;
@@ -243,6 +245,23 @@
 				2421A2451F869D2A00848FC9 /* DocTabViewController.swift */,
 			);
 			name = DOCTab;
+			sourceTree = "<group>";
+		};
+		2421A2A41F8E5D0100848FC9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2421A1E61F82B4D000848FC9 /* TaskTableViewController.swift */,
+				2421A2A71F8E5D3300848FC9 /* PageViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2421A2C81F910C5C00848FC9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2421A2CB1F910C6F00848FC9 /* DataStorage.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,12 +429,13 @@
 				2421A2551F87A81200848FC9 /* SleepTask.swift in Sources */,
 				2421A2461F869D2A00848FC9 /* DocTabViewController.swift in Sources */,
 				2421A2401F8692C200848FC9 /* Colors.swift in Sources */,
-				2421A2121F866DA900848FC9 /* OutlineClass.swift in Sources */,
 				2421A25B1F87AE9000848FC9 /* MemoryTask.swift in Sources */,
-				2421A1EB1F82C78B00848FC9 /* DOCTask.swift in Sources */,
+				2421A2A81F8E5D3300848FC9 /* PageViewController.swift in Sources */,
+				2421A1EB1F82C78B00848FC9 /* DOCEntry.swift in Sources */,
 				2421A1E71F82B4D000848FC9 /* TaskTableViewController.swift in Sources */,
 				2421A23D1F86926200848FC9 /* LandViewController.swift in Sources */,
 				2421A1B91F82B49800848FC9 /* ViewController.swift in Sources */,
+				2421A2CC1F910C6F00848FC9 /* DataStorage.swift in Sources */,
 				2421A2531F87A75900848FC9 /* MoodTask.swift in Sources */,
 				2421A1B71F82B49800848FC9 /* AppDelegate.swift in Sources */,
 				2421A2571F87A97700848FC9 /* ClockTask.swift in Sources */,

@@ -19,6 +19,7 @@ class DocTabViewController: UITabBarController {
         // load view controllers
         self.viewControllers = [
             createTasksViewController(),
+            createPageViewController()
     
         ]
         
@@ -37,6 +38,18 @@ class DocTabViewController: UITabBarController {
         return nav
     }
 
+    
+    fileprivate func createPageViewController() -> UINavigationController {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let pageViewController = mainStoryboard.instantiateViewController(withIdentifier: "PageViewController")
+        
+        pageViewController.tabBarItem = UITabBarItem(title: "Tasks", image: #imageLiteral(resourceName: "hand") , selectedImage: #imageLiteral(resourceName: "hand"))
+
+        
+        let nav = UINavigationController(rootViewController: pageViewController)
+        
+        return nav
+    }
     
 
     

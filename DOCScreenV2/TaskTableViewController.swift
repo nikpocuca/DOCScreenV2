@@ -13,31 +13,29 @@ class TaskTableViewController: UITableViewController {
 
     
     
-    var docEntries = [docEntry]()
+    var docEntries = [DocEntry]()
     
     
     
     private func loadTasks() {
-     
+        
+        guard let task1 = DocEntry(TaskName: "Profile", Image: #imageLiteral(resourceName: "profile"), CompleteString: "", Task: ProfileTask)
+            else { fatalError("unable to create docEntry") }
         
         
-        guard let task1 = docEntry(TaskName: "Profile", Image: #imageLiteral(resourceName: "profile"), CompleteString: "", Task: ProfileTask)
-            else { fatalError("unable to create docEntry") }
-        
-        
-        guard let task2 = docEntry(TaskName: "Memory", Image: #imageLiteral(resourceName: "memory"), CompleteString: "", Task: MemoryTask)
+        guard let task2 = DocEntry(TaskName: "Memory", Image: #imageLiteral(resourceName: "memory"), CompleteString: "", Task: MemoryTask)
             else { fatalError("unable to create docEntry") }
 
-        guard let task3 = docEntry(TaskName: "Mood", Image: #imageLiteral(resourceName: "mood"), CompleteString: "", Task: MoodTask)
+        guard let task3 = DocEntry(TaskName: "Mood", Image: #imageLiteral(resourceName: "mood"), CompleteString: "", Task: MoodTask)
             else { fatalError("unable to create docEntry") }
 
-        guard let task4 = docEntry(TaskName: "Sleep", Image: #imageLiteral(resourceName: "sleep"), CompleteString: "", Task: SleepTask)
+        guard let task4 = DocEntry(TaskName: "Sleep", Image: #imageLiteral(resourceName: "sleep"), CompleteString: "", Task: SleepTask)
             else { fatalError("unable to create docEntry") }
 
-        guard let task5 = docEntry(TaskName: "Clock", Image: #imageLiteral(resourceName: "clock"), CompleteString: "", Task: ClockTask)
+        guard let task5 = DocEntry(TaskName: "Clock", Image: #imageLiteral(resourceName: "clock"), CompleteString: "", Task: ClockTask)
             else { fatalError("unable to create docEntry") }
 
-        guard let task6 = docEntry(TaskName: "Abstraction", Image: #imageLiteral(resourceName: "abstraction"), CompleteString: "", Task: AbstractionTask)
+        guard let task6 = DocEntry(TaskName: "Abstraction", Image: #imageLiteral(resourceName: "abstraction"), CompleteString: "", Task: AbstractionTask)
              else { fatalError("unable to create docEntry") }
         
         
@@ -110,8 +108,6 @@ class TaskTableViewController: UITableViewController {
     
         currentCell.taskNameOut.textColor = UIColor.white
 
-        //print(docEntries[indexPath.row].taskIdentifier)
-        
         let runTask = docEntries[indexPath.row].taskIdentifier
         
         let taskViewController = ORKTaskViewController(task: runTask, taskRun: nil)
