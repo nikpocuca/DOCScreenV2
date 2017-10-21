@@ -23,7 +23,10 @@ public var ClockTask: ORKOrderedTask{
     let imageCaptureStep = ORKImageCaptureStep(identifier: "imageStep")
     imageCaptureStep.isOptional = false
     imageCaptureStep.accessibilityHint = ""
-    imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
+    imageCaptureStep.templateImage = #imageLiteral(resourceName: "target")
+    imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.3, left: 0.3, bottom: 0.3, right: 0.3)
+    
+   
     
     steps += [imageCaptureStep]
     

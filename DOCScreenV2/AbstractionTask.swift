@@ -23,7 +23,6 @@ public var AbstractionTask: ORKOrderedTask {
 
     
     let transportAnswerFormat = ORKBooleanAnswerFormat(yesString: "Correct", noString: "Incorrect")
-    
     let transportTitle = "Transportation Question"
     let transportText = "How are a train and bicycle alike?"
     let transportStep = ORKQuestionStep(identifier: "transportStep", title: transportTitle, text: transportText, answer: transportAnswerFormat)

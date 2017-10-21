@@ -11,10 +11,12 @@ import UIKit
 
 
 struct DataStorage {
+
     
     static var name: String = ""
     static var sex: String = ""
     static var date: String = ""
+    static var education: String = ""
     static var age: Int = -1
     static var weight: CGFloat = -1
     static var height: CGFloat = -1
@@ -26,7 +28,7 @@ struct DataStorage {
     static var abstractScore: Int = -1
     static var clockScore: Int = -1
     
-    static var clockImage: UIImage = #imageLiteral(resourceName: "clockBlack")
+    static var clockImage: UIImage = #imageLiteral(resourceName: "white")
     
     
 }

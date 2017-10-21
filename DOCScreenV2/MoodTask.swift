@@ -35,7 +35,7 @@ public var MoodTask: ORKOrderedTask {
     ]
     let step1AnswerFormat = ORKImageChoiceAnswerFormat(imageChoices: step1imagechoices)
     
-    let step1QuestionStep = ORKQuestionStep(identifier: "ImageChoiceQuestionStep", title: step1title, answer: step1AnswerFormat)
+    let step1QuestionStep = ORKQuestionStep(identifier: "ImageChoiceQuestion1Step", title: step1title, answer: step1AnswerFormat)
     
     
     steps += [step1QuestionStep]

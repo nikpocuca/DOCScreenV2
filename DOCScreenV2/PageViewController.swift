@@ -29,48 +29,38 @@ class PageViewController: UIViewController {
     @IBOutlet weak var clockScore: UILabel!
     
     
+    @IBOutlet weak var educationLabel: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         nameLabel.text = DataStorage.name
         sexLabel.text = DataStorage.sex
-        dateLabel.text = ""
+        dateLabel.text = DataStorage.date
+        educationLabel.text = DataStorage.education
         
         if DataStorage.age != -1 {
             
             ageLabel.text = String(DataStorage.age)
             
         }
-        else {
-            ageLabel.text = ""
-        }
+      
     
         if DataStorage.weight != -1 {
             
          weightLabel.text = String(describing: DataStorage.weight)
         }
-        else {
-            
-            weightLabel.text = ""
-        }
+   
         
         if DataStorage.height != -1 {
             
             heightLabel.text = String(describing: DataStorage.height)
         }
-        else {
-            heightLabel.text = ""
-        }
-        
+   
         if DataStorage.BMI != -1 {
             
                bmiLabel.text = String(describing: DataStorage.BMI)
             
         }
-        else {
-            
-             bmiLabel.text = ""
-            
-        }
+     
     
 
         if DataStorage.memoryScore != -1 {
@@ -78,33 +68,21 @@ class PageViewController: UIViewController {
               memoryScore.text = "[ \(DataStorage.memoryScore) ]"
         }
         
-        else {
-             memoryScore.text = "[   ]"
-        }
-        
+  
         if DataStorage.apneaScore != -1 {
             
             apneaScore.text = "[ \(DataStorage.apneaScore) ]"
 
         }
         
-        else {
-            
-            apneaScore.text = "[   ]"
-            
-        }
-        
-        
+
         if DataStorage.moodScore != -1 {
             
         moodScore.text = "[ \(DataStorage.moodScore) ]"
         
         }
         
-        else {
-            moodScore.text = "[   ]"
-            
-        }
+
         
         if DataStorage.abstractScore != -1 {
             abstractScore.text = "[ \(DataStorage.apneaScore) ]"
@@ -113,6 +91,15 @@ class PageViewController: UIViewController {
         }
         else {
             abstractScore.text = "[   ]"
+            moodScore.text = "[   ]"
+            clockScore.text = "[       ]"
+            memoryScore.text = "[   ]"
+            apneaScore.text = "[   ]"
+            bmiLabel.text = ""
+            weightLabel.text = ""
+               ageLabel.text = ""
+            heightLabel.text = ""
+            
         }
         
         
@@ -123,10 +110,7 @@ class PageViewController: UIViewController {
             clockScore.text =  "[ \(DataStorage.clockScore) ]"
         }
         
-        else {
-            
-            clockScore.text = "[       ]"
-        }
+ 
         
     }
     

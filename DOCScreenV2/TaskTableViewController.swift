@@ -48,13 +48,17 @@ class TaskTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-YYYY"
+        DataStorage.date = formatter.string(from: Date())
+        
         loadTasks()
        
         UIView.appearance().tintColor = UIColor.docRed()
 
     }
     
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -115,6 +119,8 @@ class TaskTableViewController: UITableViewController {
             taskViewController.delegate = self
         
         
+        taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
         present(taskViewController, animated: true, completion: nil)
         
       
@@ -133,7 +139,187 @@ extension TaskTableViewController:  ORKTaskViewControllerDelegate{
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         //Handle results with taskViewController.result
+  
         taskViewController.dismiss(animated: true, completion: nil)
+        
+        var documentsUrl: URL {
+            return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         }
+        
+        func loadImage(fileName: String) -> UIImage? {
+            let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+            do {
+                let imageData = try Data(contentsOf: fileURL)
+                return UIImage(data: imageData)
+            } catch {
+                print("Error loading image : \(error)")
+            }
+            return nil
+        }
+
+        
+        
+        func crop(image: UIImage, withWidth width: Double, andHeight height: Double) -> UIImage? {
+            
+            if let cgImage = image.cgImage {
+                
+                let contextImage: UIImage = UIImage(cgImage: cgImage)
+                
+                let contextSize: CGSize = contextImage.size
+                
+                var posX: CGFloat = 0.0
+                var posY: CGFloat = 0.0
+                var cgwidth: CGFloat = CGFloat(width)
+                var cgheight: CGFloat = CGFloat(height)
+                
+                // See what size is longer and create the center off of that
+                if contextSize.width > contextSize.height {
+                    posX = ((contextSize.width - contextSize.height) / 2)
+                    posY = 0
+                    cgwidth = contextSize.height
+                    cgheight = contextSize.height
+                } else {
+                    posX = 0
+                    posY = ((contextSize.height - contextSize.width) / 2)
+                    cgwidth = contextSize.width
+                    cgheight = contextSize.width
+                }
+                
+                let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+                
+                // Create bitmap image from context using the rect
+                var croppedContextImage: CGImage? = nil
+                if let contextImage = contextImage.cgImage {
+                    if let croppedImage = contextImage.cropping(to: rect) {
+                        croppedContextImage = croppedImage
+                    }
+                }
+                
+                // Create a new image based on the imageRef and rotate back to the original orientation
+                if let croppedImage:CGImage = croppedContextImage {
+                    let image: UIImage = UIImage(cgImage: croppedImage, scale: image.scale, orientation: image.imageOrientation)
+                    return image
+                }
+                
+            }
+            
+            return nil
+        }
+        
+
+        let lexicon = ["sex":DataStorage.sex,
+                       "name": DataStorage.name,
+                       "age":DataStorage.age,
+                       "BMI":DataStorage.BMI,
+                       "weight":DataStorage.weight,
+                       "education":DataStorage.education
+            ] as [String : Any]
+        let textAnswerSteps: Array<String> = ["nameStep"]
+        let numericAnswerSteps:  Array<String> = ["ageStep","educationStep","heightStep","weightStep","BMIStep"]
+        let booleanAnswerSteps: Array<String> = ["sexStep","transportStep","measureStep","loudQuestion","fatigueQuestion","breathQuestion","bloodQuestion"]
+        let choiceAnswerSteps: Array<String> = ["trial1TextChoiceQuestionStep","trial2TextChoiceQuestionStep"]
+        let imageChoiceAnswerSteps: Array<String> = ["ImageChoiceQuestion1Step","ImageChoiceQuestion2Step"]
+        var data = [String: String]()
+        
+        for step in textAnswerSteps {
+            if reason == .completed {
+            if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
+                let stepResults = stepResult.results,
+                let stepFirstResult = stepResults.first,
+                let textResult = stepFirstResult as? ORKTextQuestionResult,
+                let textAnswer = textResult.textAnswer {
+                let input =  "\(textAnswer)"
+                data = [step: input]
+                }
+            }
+        }
+        
+        for step in numericAnswerSteps {
+              if reason == .completed {
+            if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
+            let stepResults = stepResult.results,
+            let stepFirstResult = stepResults.first,
+            let numericResult = stepFirstResult as? ORKNumericQuestionResult,
+            let numericAnswer = numericResult.numericAnswer {
+            let input = "\(numericAnswer)"
+                data[step] = input;
+                }
+            }
+        }
+    
+        for step in booleanAnswerSteps {
+            if reason == .completed {
+                if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
+                    let stepResults = stepResult.results,
+                    let stepFirstResult = stepResults.first,
+                    let booleanResult = stepFirstResult as? ORKBooleanQuestionResult,
+                    let boolAnswer = booleanResult.booleanAnswer {
+                    let input = "\(boolAnswer)"
+                    data[step] = input;
+                }
+            }
+        }
+        
+        for step in choiceAnswerSteps {
+            if reason == .completed {
+                if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
+                    let stepResults = stepResult.results,
+                    let stepFirstResult = stepResults.first,
+                    let choiceResult = stepFirstResult as? ORKChoiceQuestionResult,
+                    let choiceAnswer = choiceResult.choiceAnswers {
+                    let input = "\(choiceAnswer)"
+                    data[step] = input;
+                }
+            }
+        }
+        
+        for step in imageChoiceAnswerSteps {
+            if reason == .completed {
+                if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
+                    let stepResults = stepResult.results,
+                    let stepFirstResult = stepResults.first,
+                    let choiceResult = stepFirstResult as? ORKChoiceQuestionResult,
+                    let choiceAnswer = choiceResult.choiceAnswers {
+                    let input = "\(choiceAnswer)"
+                    data[step] = input;
+                }
+            }
+        }
+        
+        let preLexKeys = data.keys
+        let lexKeys = Array(preLexKeys)
+      
+        let test = lexKeys[0].components(separatedBy: "Step")
+        print(test[0])
+        
+        
+        
+        
+        switch reason {
+        case .completed:
+            let result = taskViewController.result
+            
+            if let stepResult = result.stepResult(forStepIdentifier: "imageStep") {
+         
+                let loadSaved = loadImage(fileName: "imageStep.jpg")!
+            
+                let postCrop = crop(image: loadSaved, withWidth: 2000, andHeight: 2000)!
+                
+                DataStorage.clockImage = postCrop
+             
+            }
+    
+            
+        default:
+            break
+        }
+        
+
+    
+    }
+    
+    
+    
+    
     
 }
