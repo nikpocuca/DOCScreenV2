@@ -28,7 +28,9 @@
 		2421A25B1F87AE9000848FC9 /* MemoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A25A1F87AE9000848FC9 /* MemoryTask.swift */; };
 		2421A2A81F8E5D3300848FC9 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2A71F8E5D3300848FC9 /* PageViewController.swift */; };
 		2421A2CC1F910C6F00848FC9 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421A2CB1F910C6F00848FC9 /* DataStorage.swift */; };
+		526361631F9D557B00186AE8 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 526361621F9D557000186AE8 /* MobileNet.mlmodel */; };
 		5265D65C1F91A435003BF7B2 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5265D65B1F91A435003BF7B2 /* Utility.swift */; };
+		526AD4921F9E33DA00E4667D /* MemoryRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526AD4911F9E33DA00E4667D /* MemoryRegistration.swift */; };
 		59044EE26642763F6FC46F10 /* Pods_DOCScreenV2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B0126C1797F745F559A68C /* Pods_DOCScreenV2UITests.framework */; };
 		96B529DBBFE18D87146765A9 /* Pods_DOCScreenV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9173CED4D55B0F2F252ACD19 /* Pods_DOCScreenV2.framework */; };
 		DB0F29B6E0D980696F323835 /* Pods_DOCScreenV2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B3DDCD0898FD48CB25251A /* Pods_DOCScreenV2Tests.framework */; };
@@ -96,7 +98,9 @@
 		44BA516EB29E753BAB62CF33 /* Pods-DOCScreenV2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DOCScreenV2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DOCScreenV2Tests/Pods-DOCScreenV2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		458B071260F7BB037505EAB1 /* Pods-DOCScreenV2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DOCScreenV2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DOCScreenV2UITests/Pods-DOCScreenV2UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		51B3DDCD0898FD48CB25251A /* Pods_DOCScreenV2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DOCScreenV2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		526361621F9D557000186AE8 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MobileNet.mlmodel; path = ../../../Downloads/MobileNet.mlmodel; sourceTree = "<group>"; };
 		5265D65B1F91A435003BF7B2 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		526AD4911F9E33DA00E4667D /* MemoryRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegistration.swift; sourceTree = "<group>"; };
 		61B0126C1797F745F559A68C /* Pods_DOCScreenV2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DOCScreenV2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CE9C52C8FD517257C3265E /* Pods-DOCScreenV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DOCScreenV2.release.xcconfig"; path = "Pods/Target Support Files/Pods-DOCScreenV2/Pods-DOCScreenV2.release.xcconfig"; sourceTree = "<group>"; };
 		9173CED4D55B0F2F252ACD19 /* Pods_DOCScreenV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DOCScreenV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +202,7 @@
 			children = (
 				2421A24E1F87A64000848FC9 /* ProfileTask.swift */,
 				2421A25A1F87AE9000848FC9 /* MemoryTask.swift */,
+				526AD4911F9E33DA00E4667D /* MemoryRegistration.swift */,
 				2421A2581F87AB1F00848FC9 /* AbstractionTask.swift */,
 				2421A2561F87A97700848FC9 /* ClockTask.swift */,
 				2421A2521F87A75900848FC9 /* MoodTask.swift */,
@@ -242,6 +247,7 @@
 		2421A2C81F910C5C00848FC9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				526361621F9D557000186AE8 /* MobileNet.mlmodel */,
 				5265D65B1F91A435003BF7B2 /* Utility.swift */,
 				2421A2CB1F910C6F00848FC9 /* DataStorage.swift */,
 			);
@@ -566,12 +572,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				526361631F9D557B00186AE8 /* MobileNet.mlmodel in Sources */,
 				2421A24F1F87A64000848FC9 /* ProfileTask.swift in Sources */,
 				2421A1E91F82B4FD00848FC9 /* TaskTableViewCell.swift in Sources */,
 				2421A2551F87A81200848FC9 /* SleepTask.swift in Sources */,
 				2421A2461F869D2A00848FC9 /* DocTabViewController.swift in Sources */,
 				2421A2401F8692C200848FC9 /* Colors.swift in Sources */,
 				2421A25B1F87AE9000848FC9 /* MemoryTask.swift in Sources */,
+				526AD4921F9E33DA00E4667D /* MemoryRegistration.swift in Sources */,
 				2421A2A81F8E5D3300848FC9 /* PageViewController.swift in Sources */,
 				2421A1EB1F82C78B00848FC9 /* DOCEntry.swift in Sources */,
 				2421A1E71F82B4D000848FC9 /* TaskTableViewController.swift in Sources */,
@@ -740,6 +748,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 25W8SY99Z3;
 				INFOPLIST_FILE = DOCScreenV2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = PHRI.DOCScreenV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -755,6 +764,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 25W8SY99Z3;
 				INFOPLIST_FILE = DOCScreenV2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = PHRI.DOCScreenV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -18,7 +18,7 @@ struct DataStorage {
     static var date: String = ""
     static var education: String = ""
     static var age: Int = -1
-    static var weight: CGFloat = -1
+    static var weight: Int = -1
     static var height: CGFloat = -1
     static var BMI: CGFloat = -1
     
@@ -32,3 +32,47 @@ struct DataStorage {
     
     
 }
+
+struct ClockData {
+    static var contour: Int = -1;
+    static var numbers: Int = -1;
+    static var hands: Int = -1;
+}
+
+
+
+
+
+func dataPass(name: String, value: String) {
+    
+    func str2Float(num: String) -> CGFloat {
+        let numberFormatter = NumberFormatter()
+        let number = numberFormatter.number(from: num)!
+        let numberFloatValue = number.floatValue
+        
+        return CGFloat(numberFloatValue)
+    }
+    
+    
+    switch name {
+    case "name": DataStorage.name = value
+    case "sex": DataStorage.sex = value
+    case "education": DataStorage.education = value
+    case "age": DataStorage.age  = Int(value)!
+    case "weight": DataStorage.weight = Int(value)!
+    case "height": DataStorage.height = str2Float(num: value)
+    case "BMI" : do { let numberFormatter = NumberFormatter()
+        let number = numberFormatter.number(from: value)!
+        let numberFloatValue = number.floatValue
+        let cgFloat = CGFloat(numberFloatValue)
+        
+        DataStorage.BMI = round(1000 * cgFloat) / 1000
+        
+        }
+    default: print("No case")
+    }
+
+    
+    
+}
+

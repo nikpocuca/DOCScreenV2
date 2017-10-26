@@ -22,8 +22,7 @@ class TaskTableViewController: UITableViewController {
         guard let task1 = DocEntry(TaskName: "Profile", Image: #imageLiteral(resourceName: "profile"), CompleteString: "", Task: ProfileTask)
             else { fatalError("unable to create docEntry") }
         
-        
-        guard let task2 = DocEntry(TaskName: "Memory", Image: #imageLiteral(resourceName: "memory"), CompleteString: "", Task: MemoryTask)
+        guard let task2 = DocEntry(TaskName: "Registration", Image: #imageLiteral(resourceName: "memory"), CompleteString: "", Task: MemoryRegistrationTask)
             else { fatalError("unable to create docEntry") }
 
         guard let task3 = DocEntry(TaskName: "Mood", Image: #imageLiteral(resourceName: "mood"), CompleteString: "", Task: MoodTask)
@@ -38,8 +37,11 @@ class TaskTableViewController: UITableViewController {
         guard let task6 = DocEntry(TaskName: "Abstraction", Image: #imageLiteral(resourceName: "abstraction"), CompleteString: "", Task: AbstractionTask)
              else { fatalError("unable to create docEntry") }
         
+        guard let task7 = DocEntry(TaskName: "Memory", Image: #imageLiteral(resourceName: "memory"), CompleteString: "", Task: MemoryTask)
+            else { fatalError("unable to create docEntry") }
         
-        docEntries = [task1,task2,task3,task4,task5,task6];
+        
+        docEntries = [task1,task2,task3,task4,task5,task6,task7];
         
         
     }
@@ -206,20 +208,63 @@ extension TaskTableViewController:  ORKTaskViewControllerDelegate{
             return nil
         }
         
-
-        let lexicon = ["sex":DataStorage.sex,
+/*
+        let lexicon = ["sex": DataStorage.sex,
                        "name": DataStorage.name,
-                       "age":DataStorage.age,
-                       "BMI":DataStorage.BMI,
-                       "weight":DataStorage.weight,
-                       "education":DataStorage.education
-            ] as [String : Any]
+                       "age": DataStorage.age,
+                       "BMI": DataStorage.BMI,
+                       "weight": DataStorage.weight,
+                       "education": DataStorage.education
+            ] as NSMutableDictionary
+        */
+        
+        
         let textAnswerSteps: Array<String> = ["nameStep"]
-        let numericAnswerSteps:  Array<String> = ["ageStep","educationStep","heightStep","weightStep","BMIStep"]
+        let numericAnswerSteps:  Array<String> = ["ageStep","educationStep"]
         let booleanAnswerSteps: Array<String> = ["sexStep","transportStep","measureStep","loudQuestion","fatigueQuestion","breathQuestion","bloodQuestion"]
-        let choiceAnswerSteps: Array<String> = ["trial1TextChoiceQuestionStep","trial2TextChoiceQuestionStep"]
-        let imageChoiceAnswerSteps: Array<String> = ["ImageChoiceQuestion1Step","ImageChoiceQuestion2Step"]
+        let choiceAnswerSteps: Array<String> = ["trialWithoutCueStep"]
+        let moodChoiceAnswerSteps: Array<String> = ["moodChoiceQuestion1Step","moodChoiceQuestion2Step"]
+        let formAnswerSteps: Array<String> = ["heightStep","weightStep"]
         var data = [String: String]()
+        
+        for step in formAnswerSteps {
+            if reason == .completed {
+             if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
+                let stepResults = stepResult.results {
+                    print(stepResults)
+                for formItem in stepResults {
+                    if formItem.identifier == "heightAnswerItem" {
+                        
+                        let heightAnswerItem = formItem as? ORKNumericQuestionResult
+                        let numericAnswer = heightAnswerItem!.numericAnswer
+                        if numericAnswer != nil{
+                        let input = "\(numericAnswer!)"
+                        print(input)
+                        data[step] = input;
+                        }
+                            }
+                    
+                    if formItem.identifier == "weightAnswerItem" {
+                        
+                        let weightAnswerItem = formItem as? ORKNumericQuestionResult
+                        let numericAnswer = weightAnswerItem!.numericAnswer
+                        if numericAnswer != nil {
+                        let input = "\(numericAnswer!)"
+                        print(input)
+                        data[step] = input;
+                        }
+                    }
+        
+                        }
+                    //data = [step: input]
+                }
+            }
+        }
+        
+        
+        
+        
+        
         
         for step in textAnswerSteps {
             if reason == .completed {
@@ -273,7 +318,7 @@ extension TaskTableViewController:  ORKTaskViewControllerDelegate{
             }
         }
         
-        for step in imageChoiceAnswerSteps {
+        for step in moodChoiceAnswerSteps {
             if reason == .completed {
                 if let stepResult = taskViewController.result.stepResult(forStepIdentifier: step),
                     let stepResults = stepResult.results,
@@ -288,38 +333,170 @@ extension TaskTableViewController:  ORKTaskViewControllerDelegate{
         
         let preLexKeys = data.keys
         let lexKeys = Array(preLexKeys)
-      
-        let test = lexKeys[0].components(separatedBy: "Step")
-        print(test[0])
+        
+        print(data)
         
         
+        if taskViewController.task?.identifier == "MoodTask"{
+            DataStorage.moodScore = 0;
+        }
+        if taskViewController.task?.identifier == "SleepTask"{
+            DataStorage.apneaScore = 0;
+        }
         
+        if taskViewController.task?.identifier == "MemoryTask"{
+            DataStorage.memoryScore = 0;
+        }
         
-        switch reason {
-        case .completed:
+        if taskViewController.task?.identifier == "AbstractionTask"{
+            DataStorage.abstractScore = 0;
+        }
+        
+        if taskViewController.task?.identifier == "ClockTask" {
+            
             let result = taskViewController.result
             
-            if let stepResult = result.stepResult(forStepIdentifier: "imageStep") {
-         
+            if result.stepResult(forStepIdentifier: "imageStep") != nil {
+                
                 let loadSaved = loadImage(fileName: "imageStep.jpg")!
-            
+                
                 let postCrop = crop(image: loadSaved, withWidth: 2000, andHeight: 2000)!
                 
                 DataStorage.clockImage = postCrop
-             
+                
             }
-    
             
-        default:
-            break
+            
+            let model = MobileNet()
+            
+            
+            let inputImage = ImageProcessor.resizeImage(image: DataStorage.clockImage, targetSize: CGSize.init(width: 224, height: 224))
+            
+            DataStorage.clockImage = inputImage
+            
+            
+            if let pixelBuffer = ImageProcessor.pixelBuffer(forImage: inputImage.cgImage!) {
+                guard let scene = try? model.prediction(data: pixelBuffer) else {fatalError("Image Error")}
+                
+        
+            ClockData.contour = 0;
+            ClockData.numbers = 0;
+            ClockData.hands = 0;
+                
+                if scene.classLabel.contains("clock"){
+                    
+                    ClockData.numbers = 1;
+                }
+                
+                
+                
+            }
+            DataStorage.clockScore = ClockData.contour + ClockData.hands + ClockData.numbers
+            
+        }
+        
+        
+        
+        for preKey in lexKeys {
+        
+        let postKeyComponents = preKey.components(separatedBy: "Step")
+        let postKey = postKeyComponents[0]
+        
+            // Handle Sleep Scoring
+            if taskViewController.task?.identifier == "SleepTask"{
+            
+                let booleanChoice = data[preKey];
+                
+                let questionScore = Int(booleanChoice!)!
+                
+                DataStorage.apneaScore += questionScore
+                
+            }
+            
+            // Handle Memory Scoring
+            
+            if taskViewController.task?.identifier == "MemoryTask" {
+                
+                let textChoice = data[preKey]!;
+                
+                let resultsArray = Array(textChoice.removeCharacters(from: "[], "));
+                print("\(resultsArray)")
+                
+                let memoryScore = resultsArray.count
+                
+                DataStorage.memoryScore = memoryScore;
+                
+            }
+            
+            
+            // Handle Abstraction Scoring.
+            
+            if taskViewController.task?.identifier == "AbstractionTask" {
+                
+                let booleanChoice = data[preKey]!
+                
+                let questionScore = Int(booleanChoice)!
+                
+                DataStorage.abstractScore += questionScore
+                
+            }
+            
+            
+            
+            // Handle Mood Scoring
+            if moodChoiceAnswerSteps.contains(preKey) {
+                
+                let moodChoice = data[preKey];
+                
+                let moodScore = Int((moodChoice?.removeCharacters(from: "[]"))!)
+                
+                DataStorage.moodScore += moodScore! }
+            
+            
+            
+            // Handle BMI Calculation
+            if taskViewController.task?.identifier == "ProfileTask" {
+            
+                func str2Float(num: String) -> CGFloat {
+                let numberFormatter = NumberFormatter()
+                let number = numberFormatter.number(from: num)!
+                let numberFloatValue = number.floatValue
+                    
+                    return CGFloat(numberFloatValue)
+                }
+                
+                
+                let weight = str2Float(num: data["weightStep"]!)
+                let height = str2Float(num: data["heightStep"]!)
+                
+                let denom = height*height
+                
+                let BMI = CGFloat(weight)/CGFloat(denom)
+                
+                let input = "\(BMI)"
+                
+                
+                print("denom is: \(input)")
+
+                
+               
+            
+                
+                
+                dataPass(name: "BMI", value: input )
+                
+                }
+            //end call to fill in data.
+            dataPass(name: postKey, value: data[preKey]!)
+
         }
         
 
-    
+        
+        
+        
+       
     }
-    
-    
-    
     
     
 }

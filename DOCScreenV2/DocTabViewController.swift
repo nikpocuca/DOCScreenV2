@@ -31,7 +31,7 @@ class DocTabViewController: UITabBarController {
         
    
         
-        taskViewController.tabBarItem = UITabBarItem(title: "Tasks", image: #imageLiteral(resourceName: "hand") , selectedImage: #imageLiteral(resourceName: "hand"))
+        taskViewController.tabBarItem = UITabBarItem(title: "Tasks", image: #imageLiteral(resourceName: "hand"), selectedImage: #imageLiteral(resourceName: "hand"))
       
         let nav = UINavigationController(rootViewController: taskViewController)
         
@@ -43,7 +43,7 @@ class DocTabViewController: UITabBarController {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let pageViewController = mainStoryboard.instantiateViewController(withIdentifier: "PageViewController")
         
-        pageViewController.tabBarItem = UITabBarItem(title: "Tasks", image: #imageLiteral(resourceName: "hand") , selectedImage: #imageLiteral(resourceName: "hand"))
+        pageViewController.tabBarItem = UITabBarItem(title: "Form", image: #imageLiteral(resourceName: "task_30") , selectedImage: #imageLiteral(resourceName: "task_30"))
 
         
         let nav = UINavigationController(rootViewController: pageViewController)

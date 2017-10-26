@@ -53,27 +53,54 @@ public var ProfileTask: ORKOrderedTask{
     
     // Height Question
     
-    let hTitle = "What is your height in cm?"
-    let hAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: "cm")
-    let hStep = ORKQuestionStep(identifier: "heightStep", title: hTitle, answer: hAnswerFormat)
+    let heightFormTitle = "Height Information"
+ 
+    let heightAnswerFormat = ORKNumericAnswerFormat(style: .decimal, unit: "")
     
-    steps += [hStep]
+    let heightUnitTextChoices = [
+        ORKTextChoice(text: "inches", value: 0 as NSCoding & NSCopying & NSObjectProtocol),
+        ORKTextChoice(text: "cm", value: 1 as NSCoding & NSCopying & NSObjectProtocol)
+    ]
+    
+    let heightUnitFormat = ORKValuePickerAnswerFormat(textChoices: heightUnitTextChoices)
+    
+    let heightFormStep = ORKFormStep(identifier: "heightStep", title: heightFormTitle, text: "")
+
+    let heightUnitItem = ORKFormItem(identifier: "heightUnitItem", text: "Unit", answerFormat: heightUnitFormat)
+    let heightAnswerItem  = ORKFormItem(identifier: "heightAnswerItem", text: "Height", answerFormat: heightAnswerFormat)
+    
+    heightFormStep.formItems = [heightUnitItem,heightAnswerItem]
+
+    steps += [heightFormStep]
     
     // Weight Question
+
+    let w8formTitle = "Weight Information"
     
-    let w8Title = "What is your weight in lbs?"
-    let w8AnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: "lbs")
-    let w8Step = ORKQuestionStep(identifier: "weightStep", title: w8Title, answer: w8AnswerFormat)
-    steps += [w8Step]
+    let w8FormStep = ORKFormStep(identifier: "weightStep", title: w8formTitle, text: "")
+    
+
+    let w8UnitTextChoices = [
+    ORKTextChoice(text: "kg", value: 0 as NSCoding & NSCopying & NSObjectProtocol),
+      ORKTextChoice(text: "lbs", value: 1 as NSCoding & NSCopying & NSObjectProtocol)
+    ]
+    
+    let w8UnitAnswer = ORKValuePickerAnswerFormat(textChoices: w8UnitTextChoices)
+
+    let w8unitItem = ORKFormItem(identifier: "w8UnitItem", text: "Unit", answerFormat: w8UnitAnswer)
+    
+    let w8AnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: "")
+
+    
+    let w8AnswerItem = ORKFormItem(identifier: "weightAnswerItem", text: "Weight of subject:", answerFormat: w8AnswerFormat)
+    
+    w8FormStep.formItems = [w8unitItem,w8AnswerItem]
+    
+    steps += [w8FormStep]
     
     
     // BMI Question
-    
-    let bmiTitle = "What is your BMI?"
-    let bmiAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: "")
-    let bmiStep = ORKQuestionStep(identifier: "BMIStep", title: bmiTitle, answer: bmiAnswerFormat)
-    steps += [bmiStep]
-    
+
 
     return ORKOrderedTask(identifier: "ProfileTask", steps: steps)
 }
